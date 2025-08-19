@@ -1,8 +1,25 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { Modal } from "@/components/ui/modal";
+import { useStoreModal } from "@/hooks/use-store-modal";
+import { use, useEffect } from "react";
+import { useStore } from "zustand";
+
+const SetupPage = () => {
+    const onOpen = useStoreModal((state) => state.onOpen);
+    const isOpen = useStoreModal((state) => state.isOpen);
+
+    useEffect(() => {
+        if (!isOpen) {
+            onOpen();
+        }
+    }, [isOpen, onOpen]);
     return (
-        <p>Hellow, Admin Dashboard!</p>
+        <div className="p-4">
+            Root Page
+        </div>
 
     );
 }
+
+export default SetupPage;

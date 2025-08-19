@@ -1,3 +1,5 @@
+
+import { ModalProvider } from "@/providers/modal-provider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import {
@@ -33,7 +35,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <body>
           <header>
             <SignedOut>
               <SignInButton />
@@ -43,6 +45,7 @@ export default function RootLayout({
               <UserButton />
             </SignedIn>
           </header>
+          <ModalProvider />
           {children}
         </body>
       </html>
