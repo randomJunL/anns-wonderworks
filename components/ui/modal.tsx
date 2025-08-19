@@ -31,8 +31,9 @@ export const Modal: React.FC<ModalProps> = ({
                     <DialogTitle>{title}</DialogTitle>
                     {description && <DialogDescription>{description}</DialogDescription>}
                 </DialogHeader>
+                <div>{children}</div>
             </DialogContent>
-            <div>{children}</div>
+
         </Dialog>
     )
 }

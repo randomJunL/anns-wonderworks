@@ -2,7 +2,9 @@
 
 import { Modal } from "@/components/ui/modal";
 import { useStoreModal } from "@/hooks/use-store-modal";
-import { use, useEffect } from "react";
+import { UserButton } from "@clerk/nextjs";
+import { Children, use, useEffect } from "react";
+
 import { useStore } from "zustand";
 
 const SetupPage = () => {
@@ -14,9 +16,11 @@ const SetupPage = () => {
             onOpen();
         }
     }, [isOpen, onOpen]);
+
+
     return (
         <div className="p-4">
-            Root Page
+
         </div>
 
     );
