@@ -3,14 +3,38 @@
 import { Button } from "@/components/ui/button";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { SignedIn, SignedOut, UserButton, SignInButton, SignUpButton } from "@clerk/nextjs";
+import { cn } from "@/lib/utils";
 
 const poppins = Poppins({
     subsets: ["latin"],
     weight: ["400", "700"],
 });
 
+interface NavItemProps {
+    href: string;
+    children: React.ReactNode;
+    isActive?: boolean;
+}
+
+const NavbarItem = ({ href, children, isActive }: NavItemProps) => {
+    return (
+        <Button variant="outline" asChild className={cn("rounded-full hover:bg-transparent hover:border-primary border-transparent px-3.5 text-lg", isActive && "bg-black text-white hover:bg-black hover:text-white",)}>
+            <Link href={href}>
+                {children}
+            </Link>
+        </Button>
+    )
+}
+
+const navbarItems = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" }
+]
 export const Navbar = () => {
+    const pathname = usePathname();
     return (
         <header className="bg-white border-b">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -29,22 +53,16 @@ export const Navbar = () => {
                         </Link>
                     </div>
 
-                    {/* Center: nav links (hidden on small screens) */}
-                    <div className="hidden sm:flex sm:items-center sm:space-x-6">
-                        <Link
-                            href="/dashboard"
-                            className="text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
-                        >
-                            Dashboard
-                        </Link>
-                        <Link
-                            href="/story"
-                            className="text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
-                        >
-                            Story
-                        </Link>
+                    {/* Center: nav items */}
+                    <div className="items-center gap-4 hidden lg:flex">
+                        {
+                            navbarItems.map((item) => (
+                                <NavbarItem key={item.href} href={item.href} isActive={item.href === pathname}>
+                                    {item.label}
+                                </NavbarItem>
+                            ))
+                        }
                     </div>
-
                     {/* Right: auth actions */}
                     <div className="flex items-center space-x-3">
                         <SignedOut>
