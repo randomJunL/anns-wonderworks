@@ -6,6 +6,7 @@ import { Modal } from "@/components/ui/modal";
 import { useStoreModal } from "@/hooks/use-store-modal";
 import { UserButton } from "@clerk/nextjs";
 import { Children, use, useEffect } from "react";
+import { SignInButton } from "@clerk/nextjs";
 
 import { useStore } from "zustand";
 
@@ -21,18 +22,10 @@ const SetupPage = () => {
 
 
     return (
-        <div className="flex flex-col gap-y-4">
-            <div>
-                <p>Root Page</p>
-            </div>
-            <div>
-                <Button onClick={onOpen}>Create Store</Button>
-            </div>
-            <div>
-                <Input placeholder="Store Name" />
-            </div>
+        <div className="flex min-h-screen flex-col items-center justify-center gap-6">
+            <h1 className="text-3xl font-bold">Welcome to Ann's Wonderworks</h1>
+            <Button onClick={onOpen}>Add Item</Button>
         </div>
-
     );
 }
 

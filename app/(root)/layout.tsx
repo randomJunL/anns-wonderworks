@@ -8,12 +8,7 @@ interface Props {
 const Layout = ({ children }: Props) => {
     return (
         <>
-            <main>
-                <div>
-                    this is second layout
-                </div>
-                {children}
-            </main>
+            <main className="flex-1">{children}</main>
         </>
     );
 };

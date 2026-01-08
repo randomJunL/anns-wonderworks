@@ -48,12 +48,12 @@ export const Navbar = () => {
                     {/* Right: auth actions */}
                     <div className="flex items-center space-x-3">
                         <SignedOut>
-                            <SignInButton>
+                            <SignInButton mode="modal">
                                 <Button variant="ghost" className="hidden sm:inline-flex">
                                     Sign in
                                 </Button>
                             </SignInButton>
-                            <SignUpButton>
+                            <SignUpButton mode="modal">
                                 <Button className="hidden sm:inline-flex">Sign up</Button>
                             </SignUpButton>
                         </SignedOut>
