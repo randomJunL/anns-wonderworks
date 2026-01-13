@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { SignedIn, SignedOut, UserButton, SignInButton, SignUpButton } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import { NavbarSidebar } from "./navbar-sidebar";
 import { useState } from "react";
@@ -72,22 +71,14 @@ export const Navbar = () => {
                             ))
                         }
                     </div>
-                    {/* Right: auth actions */}
-                    <div className="">
-                        <SignedOut>
-                            <SignInButton mode="modal">
-                                <Button variant="ghost" className="hidden sm:inline-flex">
-                                    Sign in
-                                </Button>
-                            </SignInButton>
-                            <SignUpButton mode="modal">
-                                <Button className="hidden sm:inline-flex">Sign up</Button>
-                            </SignUpButton>
-                        </SignedOut>
-
-                        <SignedIn>
-                            <UserButton />
-                        </SignedIn>
+                    {/* Right: auth actions (placeholder for Payload auth) */}
+                    <div className="flex items-center space-x-3">
+                        <Button variant="ghost" onClick={() => window.location.href = '/auth/sign-in'} className="hidden sm:inline-flex">
+                            Sign in
+                        </Button>
+                        <Button variant="ghost" onClick={() => fetch('/api/auth/logout', { method: 'POST' }).then(() => window.location.reload())} className="hidden sm:inline-flex">
+                            Sign out
+                        </Button>
                     </div>
 
                     <div className="flex lg:hidden size-center justify-center">

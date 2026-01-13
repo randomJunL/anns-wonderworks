@@ -5,11 +5,13 @@ import { buildConfig } from "payload";
 import { fileURLToPath } from "url";
 import sharp from "sharp";
 
-import { Users } from "./collections/Users";
-import { Media } from "./collections/Media";
-
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
+
+import { Users } from "./collections/Users";
+import { Media } from "./collections/Media";
+import { Categories } from "./collections/Categories";
+
 
 export default buildConfig({
   admin: {
@@ -18,7 +20,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Categories],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

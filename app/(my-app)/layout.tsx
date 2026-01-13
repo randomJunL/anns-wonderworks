@@ -4,14 +4,7 @@ const inter = Inter({ subsets: ["latin"] });
 import { ModalProvider } from "@/providers/modal-provider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+// Authentication provider removed (replaced with Payload later)
 import "./globals.css";
 import { Nav } from "react-day-picker";
 import { Navbar } from "./(root)/navbar";
@@ -37,15 +30,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={inter.className}>
-          <Navbar />
-          <ModalProvider />
-          {children}
-          <Footer />
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <body className={inter.className}>
+        <Navbar />
+        <ModalProvider />
+        {children}
+        <Footer />
+      </body>
+    </html>
   );
 }
