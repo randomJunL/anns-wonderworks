@@ -1,4 +1,3 @@
-import { Nav } from "react-day-picker";
 import { Navbar } from "./navbar";
 
 interface Props {
@@ -8,7 +7,9 @@ interface Props {
 const Layout = ({ children }: Props) => {
     return (
         <>
-            <main className="flex-1">{children}</main>
+            <main className="flex-1 flex flex-col min-h-screen">
+                {children}
+            </main>
         </>
     );
 };

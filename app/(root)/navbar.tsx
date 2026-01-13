@@ -6,6 +6,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SignedIn, SignedOut, UserButton, SignInButton, SignUpButton } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
+import { NavbarSidebar } from "./navbar-sidebar";
+import { useState } from "react";
+import { MenuIcon } from "lucide-react";
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -29,12 +32,14 @@ const NavbarItem = ({ href, children, isActive }: NavItemProps) => {
 }
 
 const navbarItems = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" }
+    { href: "/", children: "Home" },
+    { href: "/about", children: "About" },
+    { href: "/contact", children: "Contact" }
 ]
 export const Navbar = () => {
     const pathname = usePathname();
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
     return (
         <header className="bg-white border-b">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,18 +58,22 @@ export const Navbar = () => {
                         </Link>
                     </div>
 
+                    {/* Navbar Sidebar */}
+
+                    <NavbarSidebar items={navbarItems} open={isSidebarOpen} onOpenChange={setIsSidebarOpen} />
+
                     {/* Center: nav items */}
                     <div className="items-center gap-4 hidden lg:flex">
                         {
                             navbarItems.map((item) => (
                                 <NavbarItem key={item.href} href={item.href} isActive={item.href === pathname}>
-                                    {item.label}
+                                    {item.children}
                                 </NavbarItem>
                             ))
                         }
                     </div>
                     {/* Right: auth actions */}
-                    <div className="flex items-center space-x-3">
+                    <div className="">
                         <SignedOut>
                             <SignInButton mode="modal">
                                 <Button variant="ghost" className="hidden sm:inline-flex">
@@ -80,8 +89,14 @@ export const Navbar = () => {
                             <UserButton />
                         </SignedIn>
                     </div>
+
+                    <div className="flex lg:hidden size-center justify-center">
+                        <Button onClick={() => setIsSidebarOpen(true)} variant="ghost" className="size-12 border-transparent bg-white">
+                            <MenuIcon />
+                        </Button>
+                    </div>
                 </nav>
-            </div>
-        </header>
+            </div >
+        </header >
     );
 };

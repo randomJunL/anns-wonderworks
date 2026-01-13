@@ -1,4 +1,5 @@
 import { Inter } from "next/font/google";
+import { Footer } from "./footer"
 const inter = Inter({ subsets: ["latin"] });
 import { ModalProvider } from "@/providers/modal-provider";
 import type { Metadata } from "next";
@@ -42,6 +43,7 @@ export default function RootLayout({
           <Navbar />
           <ModalProvider />
           {children}
+          <Footer />
         </body>
       </html>
     </ClerkProvider>
