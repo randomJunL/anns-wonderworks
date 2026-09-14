@@ -6,24 +6,27 @@ interface Props {
     params: Promise<{ id: string }>;
 }
 
-export default async function CategoryPage({ params }: Props) {
-    const { id } = await params;
-
+async function getCategory(id: string) {
     try {
         const payload = await getPayload({ config: configPromise });
-        const category = await payload.findByID({
+        return await payload.findByID({
             collection: "categories",
             id,
             depth: 1,
         });
-
-        return (
-            <section className="mx-auto w-full max-w-7xl flex-1 px-4 py-12 lg:px-8">
-                <h1 className="text-3xl font-semibold tracking-tight">{category.name}</h1>
-                <p className="mt-4 max-w-2xl text-muted-foreground">{category.description}</p>
-            </section>
-        );
     } catch {
         notFound();
     }
+}
+
+export default async function CategoryPage({ params }: Props) {
+    const { id } = await params;
+    const category = await getCategory(id);
+
+    return (
+        <section className="mx-auto w-full max-w-7xl flex-1 px-4 py-12 lg:px-8">
+            <h1 className="text-3xl font-semibold tracking-tight">{category.name}</h1>
+            <p className="mt-4 max-w-2xl text-muted-foreground">{category.description}</p>
+        </section>
+    );
 }
