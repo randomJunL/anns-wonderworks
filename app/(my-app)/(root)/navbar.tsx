@@ -52,7 +52,7 @@ export const Navbar = () => {
                             <span
                                 className={`${poppins.className} text-lg font-semibold tracking-tight text-slate-900`}
                             >
-                                Ann's Wonderworks
+                                Ann&apos;s Wonderworks
                             </span>
                         </Link>
                     </div>
@@ -71,13 +71,10 @@ export const Navbar = () => {
                             ))
                         }
                     </div>
-                    {/* Right: auth actions (placeholder for Payload auth) */}
+                    {/* Payload manages authentication in the admin area. */}
                     <div className="flex items-center space-x-3">
-                        <Button variant="ghost" onClick={() => window.location.href = '/auth/sign-in'} className="hidden sm:inline-flex">
-                            Sign in
-                        </Button>
-                        <Button variant="ghost" onClick={() => fetch('/api/auth/logout', { method: 'POST' }).then(() => window.location.reload())} className="hidden sm:inline-flex">
-                            Sign out
+                        <Button variant="ghost" asChild className="hidden sm:inline-flex">
+                            <Link href="/admin">Admin</Link>
                         </Button>
                     </div>
 
