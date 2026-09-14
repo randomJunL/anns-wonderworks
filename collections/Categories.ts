@@ -21,12 +21,30 @@ export const Categories: CollectionConfig = {
         {
             name: "price",
             type: "number",
-            required: true,
+            required: false,
         },
         {
             name: "description",
             type: "textarea",
             required: true,
         },
+        {
+            name: "parent",
+            type: "relationship",
+            relationTo: "categories",
+            hasMany: false,
+        },
+        {
+            name: "color",
+            type: "text",
+            required: false,
+        },
+        {
+            name: "subcategories",
+            type: "join",
+            collection: "categories",
+            on: "parent",
+            hasMany: true,
+        }
     ],
 }

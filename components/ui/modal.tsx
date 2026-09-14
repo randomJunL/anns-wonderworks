@@ -1,12 +1,11 @@
 "use client"
 
 import React from "react";
-import { Dialog, DialogContent, DialogHeader, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 
 interface ModalProps {
-    title: String;
-    description?: String;
+    title: string;
+    description?: string;
     isOpen: boolean;
     onClose: () => void;
     children?: React.ReactNode;
