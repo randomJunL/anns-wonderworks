@@ -2,10 +2,6 @@ import configPromise from '@payload-config'
 import type { Category } from "@/payload-types";
 import { getPayload } from "payload";
 
-
-
-import { SearchFilters } from "./search-filters";
-
 interface Props {
     children: React.ReactNode;
 }
@@ -32,7 +28,6 @@ const Layout = async ({ children }: Props) => {
     return (
         <>
             <main className="flex-1 flex flex-col min-h-screen">
-                {/* <SearchFilters data={formattedData} /> */}
                 {children}
             </main>
         </>

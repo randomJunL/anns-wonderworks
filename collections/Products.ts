@@ -1,10 +1,10 @@
-import type { CollectionConfig } from "payload";
+import { CollectionConfig } from "payload";
 
-export const Categories: CollectionConfig = {
-    slug: "categories",
+export const Products: CollectionConfig = {
+    slug: "products",
     labels: {
-        singular: "Category",
-        plural: "Categories",
+        singular: "Product",
+        plural: "Products",
     },
     access: {
         read: () => true,
@@ -30,25 +30,31 @@ export const Categories: CollectionConfig = {
             required: true,
         },
         {
-            name: "parent",
+            name: "price",
+            type: "number",
+            required: true,
+            min: 0,
+        },
+        {
+            name: "category",
             type: "relationship",
             relationTo: "categories",
-            hasMany: false,
+            required: true,
         },
         {
             name: "image",
             type: "relationship",
             relationTo: "media",
             admin: {
-                description: "Optional image used for category navigation and collection pages.",
+                description: "Optional image used for product display.",
             },
         },
         {
-            name: "subcategories",
-            type: "join",
-            collection: "categories",
-            on: "parent",
-            hasMany: true,
+            name: "inventory",
+            type: "number",
+            required: true,
+            min: 0,
+            defaultValue: 0,
         }
     ],
 }
