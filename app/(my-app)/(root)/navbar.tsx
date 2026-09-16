@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { NavbarSidebar } from "./navbar-sidebar";
 import { useState } from "react";
-import { MenuIcon } from "lucide-react";
+import { MenuIcon, Search, ShoppingBag, User } from "lucide-react";
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -32,6 +32,7 @@ const NavbarItem = ({ href, children, isActive }: NavItemProps) => {
 
 const navbarItems = [
     { href: "/", children: "Home" },
+    { href: "/shop", children: "Shop" },
     { href: "/about", children: "About" },
     { href: "/contact", children: "Contact" }
 ]
@@ -43,23 +44,19 @@ export const Navbar = () => {
         <header className="bg-white border-b">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <nav
-                    className="h-16 flex items-center justify-between"
+                    className="min-h-16 flex items-center justify-between gap-2"
                     aria-label="Main navigation"
                 >
                     {/* Left: brand */}
-                    <div className="flex items-center space-x-4">
+                    <div className="min-w-0">
                         <Link href="/" className="flex items-center">
                             <span
-                                className={`${poppins.className} text-lg font-semibold tracking-tight text-slate-900`}
+                                className={`${poppins.className} text-sm sm:text-lg font-semibold tracking-tight text-slate-900`}
                             >
                                 Ann&apos;s Wonderworks
                             </span>
                         </Link>
                     </div>
-
-                    {/* Navbar Sidebar */}
-
-                    <NavbarSidebar items={navbarItems} open={isSidebarOpen} onOpenChange={setIsSidebarOpen} />
 
                     {/* Center: nav items */}
                     <div className="items-center gap-4 hidden lg:flex">
@@ -71,17 +68,34 @@ export const Navbar = () => {
                             ))
                         }
                     </div>
-                    {/* Payload manages authentication in the admin area. */}
-                    <div className="flex items-center space-x-3">
-                        <Button variant="ghost" asChild className="hidden sm:inline-flex">
-                            <Link href="/admin">Admin</Link>
+                    {/* Shopping controls are separate from the browsing links. */}
+                    <div className="flex shrink-0 items-center gap-1 sm:gap-2">
+                        {/* Enable Search when the search panel is implemented. */}
+                        <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            className="size-11"
+                            disabled
+                            aria-label="Search (coming soon)"
+                        >
+                            <Search aria-hidden="true" />
                         </Button>
-                    </div>
-
-                    <div className="flex lg:hidden size-center justify-center">
-                        <Button onClick={() => setIsSidebarOpen(true)} variant="ghost" className="size-12 border-transparent bg-white">
-                            <MenuIcon />
+                        <Button variant="ghost" size="icon" asChild className="hidden size-11 lg:inline-flex">
+                            <Link href="/account" aria-label="Your account">
+                                <User aria-hidden="true" />
+                            </Link>
                         </Button>
+                        <Button variant="ghost" size="icon" asChild className="size-11">
+                            <Link href="/cart" aria-label="Shopping cart">
+                                <ShoppingBag aria-hidden="true" />
+                            </Link>
+                        </Button>
+                        <NavbarSidebar items={navbarItems} open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
+                            <Button type="button" variant="ghost" size="icon" className="size-11 lg:hidden" aria-label="Open menu">
+                                <MenuIcon aria-hidden="true" />
+                            </Button>
+                        </NavbarSidebar>
                     </div>
                 </nav>
             </div >
