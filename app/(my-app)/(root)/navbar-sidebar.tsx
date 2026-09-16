@@ -10,7 +10,7 @@ interface NavbarSidebarProps {
 
 interface NavbarItem {
     href: string;
-    children: React.ReactNode;
+    label: string;
 }
 
 
@@ -30,7 +30,7 @@ export const NavbarSidebar = ({ items, open, onOpenChange }: NavbarSidebarProps)
                     {items.map((item) => (
                         <Link key={item.href} href={item.href}
                             className={"w-full text-left p-4 hover:bg-black hover:text-white flex items-center text-base font-medium"}>
-                            {item.children}
+                            {item.label}
                         </Link>
 
                     ))}

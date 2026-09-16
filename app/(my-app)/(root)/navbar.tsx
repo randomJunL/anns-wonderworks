@@ -31,9 +31,10 @@ const NavbarItem = ({ href, children, isActive }: NavItemProps) => {
 }
 
 const navbarItems = [
-    { href: "/", children: "Home" },
-    { href: "/about", children: "About" },
-    { href: "/contact", children: "Contact" }
+    { href: "/", label: "Home" },
+    { href: "/shop", label: "Shop" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" }
 ]
 export const Navbar = () => {
     const pathname = usePathname();
@@ -66,7 +67,7 @@ export const Navbar = () => {
                         {
                             navbarItems.map((item) => (
                                 <NavbarItem key={item.href} href={item.href} isActive={item.href === pathname}>
-                                    {item.children}
+                                    {item.label}
                                 </NavbarItem>
                             ))
                         }
